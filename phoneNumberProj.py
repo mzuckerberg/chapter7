@@ -32,7 +32,7 @@ phoneRegex = re.compile(r'''(
     (s|-|\.)                        # separator non optional
     (\d{4})                         # last 4 digits
     (\s*(ext|x|ext.)\s*(\d{2,5}))?  # extension
-    '''), re.VERBOSE)
+    )''', re.VERBOSE)
 
 # email regex
 
@@ -54,4 +54,11 @@ for groups in phoneRegex.findall(text):
 for groups in emailRegex.findall(text):
     matches.append(groups[0])
 
-# TODO: copy results to the clipboard
+# copy results to the clipboard
+
+if len(matches) > 0:
+    pyperclip.copy('\n'.join(matches))
+    print('Copied to clipboard:')
+    print('\n'.join(matches))
+else:
+    print('No phone numbers or email addyz found.')
